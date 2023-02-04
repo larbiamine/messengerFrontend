@@ -5,6 +5,7 @@ import Checkbox from "@material-tailwind/react/components/Checkbox";
 import LoadingButton from "../components/LoadingButton";
 
 function Login() {
+	document.title = "Login";
 	const [passwordError, setPasswordError] = useState(false);
 	const [usernameError, setUsernameError] = useState(false);
 
