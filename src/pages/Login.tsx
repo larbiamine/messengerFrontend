@@ -78,6 +78,7 @@ function Login() {
 							loading={loading}
 							title="Login"
 							submit={true}
+							fullWidth
 							bg="var3"
 						/>
 					</div>

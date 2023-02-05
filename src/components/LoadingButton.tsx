@@ -3,19 +3,31 @@ interface buttonProps {
 	title: String;
 	submit?: boolean;
 	loading?: boolean;
+	fullWidth?: boolean;
 	bg?: String;
 	onClick?: Function;
 }
 
-function LoadingButton({ loading, submit, title, bg }: buttonProps) {
+function LoadingButton({ loading, fullWidth, submit, title, bg }: buttonProps) {
+	console.log("🆘 || file: LoadingButton.tsx:12 || bg", bg);
+
+	// const classes = ;
+
 	return (
-		<Button
+		<button
 			disabled={loading}
-			ripple={false}
 			type={submit ? "submit" : "button"}
 			fullWidth
 			size="sm"
-			className={`bg-${bg}`}
+			className={`
+			bg-${bg}
+			${fullWidth ? "w-full" : ""}
+			pl-2
+			pr-2
+			pb-2
+			pt-1
+			rounded-lg
+			`}
 		>
 			{loading && (
 				<svg
@@ -37,7 +49,7 @@ function LoadingButton({ loading, submit, title, bg }: buttonProps) {
 				</svg>
 			)}
 			{title}
-		</Button>
+		</button>
 	);
 }
 

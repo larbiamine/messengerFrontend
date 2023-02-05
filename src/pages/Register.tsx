@@ -52,16 +52,16 @@ function Register() {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="bg-var1 rounded-2xl flex  flex-col gap-6"
+			className="bg-var1 rounded-lg flex  flex-col gap-6"
 		>
-			<div className="  py-8 px-8 max-w-sm mx-auto bg-dark rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
+			<div className="  py-8 px-8 max-w-sm mx-auto bg-dark rounded-lg shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
 				<div className="  text-center space-y-4 sm:text-left">
 					<p className="text-lg text-white font-semibold">Register</p>
 					<div className="space-y-0.5">
 						<p className="text-slate-400 font-medium">Username</p>
 						<input
 							name="username"
-							className="pl-4 focus:border-transparent h-8 focus:ring-lighterbg rounded-2xl border-lighterbg text-black bg-dark bg-light"
+							className="pl-4 focus:border-transparent h-8 focus:ring-lighterbg rounded-lg border-lighterbg text-black bg-dark bg-light"
 							type="text"
 						/>
 						{usernameError && (
@@ -72,7 +72,7 @@ function Register() {
 						<p className="text-slate-400 font-medium">Email</p>
 						<input
 							name="email"
-							className="pl-4 focus:border-transparent h-8 focus:ring-lighterbg rounded-2xl border-lighterbg text-black bg-dark bg-light"
+							className="pl-4 focus:border-transparent h-8 focus:ring-lighterbg rounded-lg border-lighterbg text-black bg-dark bg-light"
 							type="text"
 						/>
 						{emailError && (
@@ -83,7 +83,7 @@ function Register() {
 						<p className="text-slate-400 font-medium">Password</p>
 						<input
 							name="password"
-							className="pl-4 focus:border-transparent h-8 focus:ring-lighterbg text-black rounded-2xl border-lighterbg bg-light"
+							className="pl-4 focus:border-transparent h-8 focus:ring-lighterbg text-black rounded-lg border-lighterbg bg-light"
 							type="password"
 							onChange={(e) => {
 								setPassword(e.target.value);
@@ -98,7 +98,7 @@ function Register() {
 						<p className="text-slate-400 font-medium">Comfirm Password</p>
 						<input
 							name="cpassword"
-							className="pl-4 focus:border-transparent h-8 focus:ring-lighterbg text-black rounded-2xl border-lighterbg bg-light"
+							className="pl-4 focus:border-transparent h-8 focus:ring-lighterbg text-black rounded-lg border-lighterbg bg-light"
 							type="password"
 							onChange={(e) => {
 								handlePwdChange(e);
@@ -113,7 +113,8 @@ function Register() {
 					<div className=" ">
 						<LoadingButton
 							loading={loading}
-							title="Login"
+							fullWidth
+							title="Register"
 							submit={true}
 							bg="var3"
 						/>
