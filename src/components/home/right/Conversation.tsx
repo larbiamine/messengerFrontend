@@ -217,76 +217,7 @@ const Conversations = [
 		},
 	],
 ];
-const messages = [
-	{
-		sender: true,
-		message: "hello everyone",
-	},
-	{
-		sender: false,
-		message: "hi",
-	},
-	{
-		sender: false,
-		message: "wassup",
-	},
-	{
-		sender: true,
-		message: "hello asdjkghbkeveryone",
-	},
-	{
-		sender: false,
-		message: "wassupasjhsgb",
-	},
-	{
-		sender: false,
-		message: "wassupasjhsgbsadgvwsb",
-	},
-	{
-		sender: true,
-		message: "hello everyone",
-	},
-	{
-		sender: false,
-		message: "hi",
-	},
-	{
-		sender: false,
-		message: "wassup",
-	},
-	{
-		sender: true,
-		message: "hello asdjkghbkeveryone",
-	},
-	{
-		sender: false,
-		message: "wassupasjhsgb",
-	},
-	{
-		sender: false,
-		message: "wassupasjhsgbsadgvwsb",
-	},
-	{
-		sender: false,
-		message: "wassupasjhsgb",
-	},
-	{
-		sender: false,
-		message: "wassupasjhsgbsadgvwsb",
-	},
-	{
-		sender: false,
-		message: "wassup",
-	},
-	{
-		sender: true,
-		message: "hello asdjkghbkeveryone",
-	},
-	{
-		sender: false,
-		message: "wassupasjhsgb",
-	},
-];
+
 function Conversation({ selectedChat }: Props) {
 	return (
 		<div
