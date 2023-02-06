@@ -2,7 +2,7 @@ import React from "react";
 
 function Search() {
 	const classes = `
-    my-2 p-2 rounded-lg flex bg-var1 flex-row
+    my-2 p-2 rounded-lg flex bg-var1 flex-row 
     `;
 	return (
 		<div className={classes}>

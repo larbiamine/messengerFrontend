@@ -1,9 +1,17 @@
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 import Message from "./conversation/Message";
+
+import MessageInput from "./conversation/MessageInput";
+
 interface Props {
 	selectedChat: number;
 }
-const Conversations = [
+interface MessageObj {
+	sender: boolean;
+	message: string;
+}
+
+var cConversations = [
 	[
 		{
 			sender: true,
@@ -219,16 +227,40 @@ const Conversations = [
 ];
 
 function Conversation({ selectedChat }: Props) {
+	const [conversation, setConversation] = useState<MessageObj[]>([]);
+	const [loading, setLoading] = useState(true);
+	const bottomRef = useRef(null);
+	useEffect(() => {
+		setConversation(cConversations[selectedChat]);
+
+		setLoading(false);
+		bottomRef.current.scrollIntoView({ behavior: "smooth" });
+	}, [selectedChat]);
+
+	const sendMsg = (message: string) => {
+		if (message != "") {
+			setConversation((oldData) => [
+				...oldData,
+				{ sender: true, message: message },
+			]);
+		}
+		bottomRef.current.scrollIntoView({ behavior: "smooth" });
+	};
 	return (
 		<div
 			style={{
 				height: "76vh",
 			}}
-			className="overflow-auto p-4 flex flex-col my-4 border-var1 border-t "
+			className=" pt-4 px-4 flex flex-col my-4 border-var1 border-t "
 		>
-			{Conversations[selectedChat].map(({ sender, message }) => (
-				<Message sender={sender} message={message} />
-			))}
+			<div className="mb-4 overflow-auto">
+				{!loading &&
+					conversation.map(({ sender, message }, index) => (
+						<Message key={index} sender={sender} message={message} />
+					))}
+				<div ref={bottomRef}></div>
+			</div>
+			<MessageInput sendMsg={sendMsg} />
 		</div>
 	);
 }

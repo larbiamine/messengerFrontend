@@ -13,7 +13,9 @@ type Props = {
 
 function Chat({ user, selected, lastMessage }: Props) {
 	const classes = `
-    my-2 p-2 rounded-lg flex ${selected ? "bg-var1" : ""} flex-row
+    my-2 p-2 rounded-lg flex ${
+			selected ? "bg-var1" : ""
+		} flex-row transition-all duration-300 
     `;
 
 	return (

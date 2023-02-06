@@ -44,20 +44,36 @@ function UserAvatar({ selectedChat }: Props) {
 
 function Online() {
 	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			fill="green"
-			viewBox="0 0 24 24"
-			strokeWidth={0}
-			stroke="green"
-			className="w-4 h-4 my-3"
-		>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 "
-			/>
-		</svg>
+		<div className="flex">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="white"
+				viewBox="0 0 24 24"
+				strokeWidth={0}
+				stroke="green"
+				className="w-4 h-4 my-3 animate-ping opacity-50 absolute "
+			>
+				<path
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 "
+				/>
+			</svg>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="green"
+				viewBox="0 0 24 24"
+				strokeWidth={0}
+				stroke="green"
+				className="w-4 h-4 my-3 relative "
+			>
+				<path
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 "
+				/>
+			</svg>
+		</div>
 	);
 }
 

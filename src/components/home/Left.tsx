@@ -3,7 +3,8 @@ import Chat from "./left/Chat";
 import Search from "./left/Search";
 
 type Props = {
-	setSelectedChat?: Function;
+	setSelectedChat: Function;
+
 	selectedChat?: number;
 };
 
@@ -46,7 +47,7 @@ const chats = [
 	},
 ];
 
-function Left({ selectedChat, setSelectedChat, children }: Props) {
+function Left({ selectedChat, setSelectedChat }: Props) {
 	return (
 		<div className="  p-5 basis-1/3 rounded-l-lg w-full h-full bg-var2 ">
 			<h6 className=" mb-6 text-xl text-left">Chats</h6>
@@ -60,6 +61,7 @@ function Left({ selectedChat, setSelectedChat, children }: Props) {
 				{chats.map(({ user, lastMessage }, index) => (
 					<div onClick={() => setSelectedChat(index)}>
 						<Chat
+							key={index + user.name}
 							selected={selectedChat === index}
 							user={user}
 							lastMessage={lastMessage}
