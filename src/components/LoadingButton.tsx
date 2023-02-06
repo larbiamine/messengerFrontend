@@ -1,4 +1,3 @@
-import { Button } from "@material-tailwind/react";
 interface buttonProps {
 	title: String;
 	submit?: boolean;
@@ -9,16 +8,12 @@ interface buttonProps {
 }
 
 function LoadingButton({ loading, fullWidth, submit, title, bg }: buttonProps) {
-	console.log("🆘 || file: LoadingButton.tsx:12 || bg", bg);
-
 	// const classes = ;
 
 	return (
 		<button
 			disabled={loading}
 			type={submit ? "submit" : "button"}
-			fullWidth
-			size="sm"
 			className={`
 			bg-${bg}
 			${fullWidth ? "w-full" : ""}

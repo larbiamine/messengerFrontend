@@ -7,6 +7,7 @@ const iState: initialState = {
 	isRegisterError: false,
 	isLoginError: false,
 	registerError: "",
+	loginError: "",
 };
 
 const userSlice = createSlice({
@@ -38,8 +39,9 @@ const userSlice = createSlice({
 
 			state.isRegisterError = false;
 		},
-		loginFailed: (state) => {
+		loginFailed: (state, action) => {
 			state.isLoginError = true;
+			state.loginError = action.payload;
 			state.isFetching = false;
 		},
 		registerStart: (state) => {
