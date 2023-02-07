@@ -1,6 +1,3 @@
-import { avatar } from "@material-tailwind/react";
-import React from "react";
-
 interface User {
 	name: string;
 	avatar: string;

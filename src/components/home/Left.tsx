@@ -1,11 +1,14 @@
 import { ReactNode, useState } from "react";
 import Chat from "./left/Chat";
 import Search from "./left/Search";
+import { Conversation } from "../../utilities/types";
+import TempChat from "./left/TempChat";
 
 type Props = {
 	setSelectedChat: Function;
-
+	isLoading: Boolean;
 	selectedChat?: number;
+	conversations: Array<Conversation>;
 };
 
 const chats = [
@@ -47,7 +50,14 @@ const chats = [
 	},
 ];
 
-function Left({ selectedChat, setSelectedChat }: Props) {
+function Left({
+	conversations,
+	isLoading,
+	selectedChat,
+	setSelectedChat,
+}: Props) {
+	!isLoading && console.log(conversations);
+
 	return (
 		<div className="  p-5 basis-1/3 rounded-l-lg w-full h-full bg-var2 ">
 			<h6 className=" mb-6 text-xl text-left">Chats</h6>
@@ -58,16 +68,26 @@ function Left({ selectedChat, setSelectedChat }: Props) {
 					overflow: "auto",
 				}}
 			>
-				{chats.map(({ user, lastMessage }, index) => (
-					<div onClick={() => setSelectedChat(index)}>
-						<Chat
-							key={index + user.name}
-							selected={selectedChat === index}
-							user={user}
-							lastMessage={lastMessage}
-						/>
-					</div>
-				))}
+				{!isLoading ? (
+					// chats.map(({ user, lastMessage }, index) => (
+					// 	<div onClick={() => setSelectedChat(index)}>
+					// 		<Chat
+					// 			key={index + user.name}
+					// 			selected={selectedChat === index}
+					// 			user={user}
+					// 			lastMessage={lastMessage}
+					// 		/>
+
+					// 	</div>
+					// ))
+					conversations.map((c, index) => (
+						<div onClick={() => setSelectedChat(index)}>
+							<TempChat selected={selectedChat === index} conversation={c} />
+						</div>
+					))
+				) : (
+					<div className="rounded-lg animate-pulse opacity-0 w-full h-full bg-var3"></div>
+				)}
 			</div>
 		</div>
 	);

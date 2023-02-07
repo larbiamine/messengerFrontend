@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const colors = {
 	danger: "#D52941",
+
 	var3: "#FB2576",
 	var2: "#3F0071",
 	var1: "#150050",
