@@ -2,9 +2,11 @@ import { useState, useRef, useEffect } from "react";
 import Message from "./conversation/Message";
 
 import MessageInput from "./conversation/MessageInput";
+import { ConversationType } from "../../../utilities/types";
 
 interface Props {
-	selectedChat: number;
+	cconversation: ConversationType;
+	isLoading: Boolean;
 }
 interface MessageObj {
 	sender: boolean;
@@ -226,16 +228,17 @@ var cConversations = [
 	],
 ];
 
-function Conversation({ selectedChat }: Props) {
-	const [conversation, setConversation] = useState<MessageObj[]>([]);
+function Conversation({ isLoading, cconversation }: Props) {
+	const [conversation, setConversation] =
+		useState<ConversationType>(cconversation);
 	const [loading, setLoading] = useState(true);
 	const bottomRef = useRef(null);
 	useEffect(() => {
-		setConversation(cConversations[selectedChat]);
+		setConversation(cconversation);
 
 		setLoading(false);
 		bottomRef.current.scrollIntoView({ behavior: "smooth" });
-	}, [selectedChat]);
+	}, [cconversation]);
 
 	const sendMsg = (message: string) => {
 		if (message != "") {
@@ -254,9 +257,9 @@ function Conversation({ selectedChat }: Props) {
 			className=" pt-4 px-4 flex flex-col my-4 border-var1 border-t "
 		>
 			<div className="mb-4 overflow-auto">
-				{!loading &&
-					conversation.map(({ sender, message }, index) => (
-						<Message key={index} sender={sender} message={message} />
+				{!isLoading &&
+					conversation.messages.map(({ sender, body }, index) => (
+						<Message key={index} sender={sender} message={body} />
 					))}
 				<div ref={bottomRef}></div>
 			</div>

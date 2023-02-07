@@ -1,14 +1,13 @@
 import { ReactNode, useState } from "react";
 import Chat from "./left/Chat";
 import Search from "./left/Search";
-import { Conversation } from "../../utilities/types";
-import TempChat from "./left/TempChat";
+import { ConversationType } from "../../utilities/types";
 
 type Props = {
 	setSelectedChat: Function;
 	isLoading: Boolean;
 	selectedChat?: number;
-	conversations: Array<Conversation>;
+	conversations: Array<ConversationType>;
 };
 
 const chats = [
@@ -56,8 +55,6 @@ function Left({
 	selectedChat,
 	setSelectedChat,
 }: Props) {
-	!isLoading && console.log(conversations);
-
 	return (
 		<div className="  p-5 basis-1/3 rounded-l-lg w-full h-full bg-var2 ">
 			<h6 className=" mb-6 text-xl text-left">Chats</h6>
@@ -69,20 +66,9 @@ function Left({
 				}}
 			>
 				{!isLoading ? (
-					// chats.map(({ user, lastMessage }, index) => (
-					// 	<div onClick={() => setSelectedChat(index)}>
-					// 		<Chat
-					// 			key={index + user.name}
-					// 			selected={selectedChat === index}
-					// 			user={user}
-					// 			lastMessage={lastMessage}
-					// 		/>
-
-					// 	</div>
-					// ))
 					conversations.map((c, index) => (
 						<div onClick={() => setSelectedChat(index)}>
-							<TempChat selected={selectedChat === index} conversation={c} />
+							<Chat selected={selectedChat === index} conversation={c} />
 						</div>
 					))
 				) : (

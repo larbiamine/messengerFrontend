@@ -1,5 +1,7 @@
+import { getUser } from "../../../utilities/fetchApi";
+import { useQuery } from "@tanstack/react-query";
 interface Props {
-	selectedChat: number;
+	id: String;
 }
 
 const users = [
@@ -28,17 +30,24 @@ const users = [
 	},
 ];
 
-function UserAvatar({ selectedChat }: Props) {
-	return (
+function UserAvatar({ id }: Props) {
+	const querykey = [`user ${id}`];
+	const { status, data, error, isLoading } = useQuery(querykey, () =>
+		getUser(id)
+	);
+
+	return !isLoading ? (
 		<div className="m-5 flex flex-row">
 			<img
-				src={users[selectedChat].avatar}
+				src={data.avatar}
 				alt=""
 				className=" inline-block relative object-cover object-center w-10 h-10 rounded-xl"
 			/>
-			<h6 className="p-2 ml-2">{users[selectedChat].name}</h6>
+			<h6 className="p-2 ml-2">{data.username}</h6>
 			<Online />
 		</div>
+	) : (
+		<div className="m-5 flex flex-row">Loading</div>
 	);
 }
 

@@ -3,7 +3,7 @@ interface Message {
 	body: string;
 	time: string;
 }
-export interface Conversation {
+export interface ConversationType {
 	_id: String;
 	participants: Array<String>;
 	messages: Array<Message>;

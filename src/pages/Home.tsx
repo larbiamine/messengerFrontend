@@ -16,15 +16,17 @@ function Home() {
 	return (
 		<Container>
 			{/* <h1 className="text-3xl font-bold underline">Welcome</h1> */}
-			<div className="flex flex-row">
-				<Left
-					isLoading={isLoading}
-					selectedChat={selectedChat}
-					setSelectedChat={setSelectedChat}
-					conversations={data}
-				/>
-				<Right isLoading={isLoading} selectedChat={selectedChat} />
-			</div>
+			{status === "success" && (
+				<div className="flex flex-row">
+					<Left
+						isLoading={isLoading}
+						selectedChat={selectedChat}
+						setSelectedChat={setSelectedChat}
+						conversations={data}
+					/>
+					<Right conversation={data[selectedChat]} isLoading={isLoading} />
+				</div>
+			)}
 		</Container>
 	);
 }
