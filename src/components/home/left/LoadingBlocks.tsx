@@ -4,8 +4,8 @@ const LoadingBlocks = () => {
 
 	return (
 		<>
-			{[1, 2, 3, 4, 5, 5, 5].map((a) => (
-				<div className={classes}></div>
+			{[654, 453, 789, 41253, 6, 54, 786].map((a) => (
+				<div key={a} className={classes}></div>
 			))}
 		</>
 	);

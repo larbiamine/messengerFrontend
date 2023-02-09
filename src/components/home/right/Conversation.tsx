@@ -3,6 +3,8 @@ import Message from "./conversation/Message";
 
 import MessageInput from "./conversation/MessageInput";
 import { ConversationType } from "../../../utilities/types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { sendMessage } from "../../../utilities/fetchApi";
 
 interface Props {
 	cconversation: ConversationType;
@@ -240,12 +242,16 @@ function Conversation({ isLoading, cconversation }: Props) {
 		bottomRef.current.scrollIntoView({ behavior: "smooth" });
 	}, [cconversation]);
 
+	const queryClient = useQueryClient();
+	const mutationKey = ["conversations"];
+	const mutation = useMutation(sendMessage, mutationKey, () => {
+		queryClient.invalidateQueries([mutationKey]);
+	});
+
 	const sendMsg = (message: string) => {
 		if (message != "") {
-			setConversation((oldData) => [
-				...oldData,
-				{ sender: true, message: message },
-			]);
+			const m = { conversationId: cconversation._id, body: message };
+			mutation.mutate(m);
 		}
 		bottomRef.current.scrollIntoView({ behavior: "smooth" });
 	};
@@ -258,8 +264,8 @@ function Conversation({ isLoading, cconversation }: Props) {
 		>
 			<div className="mb-4 overflow-auto">
 				{!isLoading &&
-					conversation.messages.map(({ sender, body }, index) => (
-						<Message key={index} sender={sender} message={body} />
+					conversation.messages.map(({ _id, sender, body }, index) => (
+						<Message key={_id} sender={sender} message={body} />
 					))}
 				<div ref={bottomRef}></div>
 			</div>

@@ -3,6 +3,8 @@ import { getUser } from "../../../utilities/fetchApi";
 import { ConversationType } from "../../../utilities/types";
 import { useQuery } from "@tanstack/react-query";
 import LoadingBlocks from "./LoadingBlocks";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../redux/store";
 
 interface props {
 	conversation: ConversationType;
@@ -17,7 +19,9 @@ function Chat({ conversation, selected }: props) {
 		} flex-row transition-all duration-300 
     `;
 
-	const recipient = participants[1];
+	const { currentUser } = useSelector((state: IRootState) => state);
+	const recipient =
+		participants[1] === currentUser._id ? participants[0] : participants[1];
 
 	const { body } = messages[messages.length - 1];
 
@@ -25,10 +29,6 @@ function Chat({ conversation, selected }: props) {
 	const { status, data, error, isLoading } = useQuery(querykey, () =>
 		getUser(recipient)
 	);
-
-	status === "success" &&
-		console.log("🆘 || file: TempChat.tsx:26 || data", data);
-
 	if (isLoading) {
 		return <LoadingBlocks />;
 	}

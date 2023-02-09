@@ -1,4 +1,5 @@
 import { userRequest } from "./requestMethodes";
+import { MutationMessage } from "./types";
 
 export async function getConversations() {
 	try {
@@ -13,7 +14,18 @@ export async function getUser(recipient: String) {
 	try {
 		const { data } = await userRequest.get(`user/getuser/${recipient}`);
 
-		console.log("🆘 || file: fetchApi.ts:17 || data", data);
+		return data;
+	} catch (error) {
+		return error;
+	}
+}
+
+export async function sendMessage(variables: MutationMessage) {
+	try {
+		const { data } = await userRequest.post(
+			"conversation/sendmessage",
+			variables
+		);
 
 		return data;
 	} catch (error) {

@@ -9,9 +9,10 @@ type Props = {
 function Message({ message, sender }: Props) {
 	const { currentUser } = useSelector((state: IRootState) => state);
 	const classes = `
-     mb-1  rounded-2xl py-1.5 px-2 ${sender ? "bg-var3" : "bg-var1"}
+     mb-1  rounded-2xl py-1.5 px-2 ${
+				sender === currentUser._id ? "bg-var3" : "bg-var1"
+			}
     `;
-
 	return (
 		<div
 			className={`   flex ${

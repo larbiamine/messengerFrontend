@@ -9,10 +9,10 @@ function Home() {
 
 	const querykey = ["conversations"];
 	const { status, data, error, isLoading } = useQuery(
-		["conversations"],
+		querykey,
 		getConversations
 	);
-
+	status === "success" && console.log("🆘 || file: Home.tsx:13 || data", data);
 	return (
 		<Container>
 			{/* <h1 className="text-3xl font-bold underline">Welcome</h1> */}

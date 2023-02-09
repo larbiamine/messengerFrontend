@@ -67,7 +67,7 @@ function Left({
 			>
 				{!isLoading ? (
 					conversations.map((c, index) => (
-						<div onClick={() => setSelectedChat(index)}>
+						<div key={c._id} onClick={() => setSelectedChat(index)}>
 							<Chat selected={selectedChat === index} conversation={c} />
 						</div>
 					))
