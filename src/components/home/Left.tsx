@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 type Props = {
 	setSelectedChat: Function;
 	isLoading: Boolean;
+
 	selectedChat?: number;
 	conversations: Array<ConversationType>;
 };
