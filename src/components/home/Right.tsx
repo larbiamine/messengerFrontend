@@ -9,8 +9,8 @@ type Props = {
 function Right({ conversation, isLoading }: Props) {
 	return (
 		<div
-			style={{ marginTop: "-1px" }}
-			className="border-var1 border  basis-2/3 rounded-r-lg w-full h-full bg-var2 "
+			style={{ marginTop: "0px" }}
+			className="border-var1 border basis-2/3 rounded-r-lg w-full   bg-var2 "
 		>
 			{!isLoading && <UserAvatar id={conversation.participants[1]} />}
 			{isLoading ? (

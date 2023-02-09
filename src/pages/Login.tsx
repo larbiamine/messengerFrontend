@@ -8,7 +8,7 @@ import { login } from "../utilities/authApi";
 import { loginUser } from "../utilities/authTypes";
 import { IRootState } from "../redux/store";
 import { initState } from "../redux/userRedux";
-
+import { useNavigate } from "react-router-dom";
 function Login() {
 	document.title = "Login";
 	const [passwordError, setPasswordError] = useState(false);
@@ -20,6 +20,7 @@ function Login() {
 	const { isLoginError, loginError, isFetching } = useSelector(
 		(state: IRootState) => state
 	);
+	const navigate = useNavigate();
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -36,8 +37,7 @@ function Login() {
 		if (validation) {
 			console.log("💢 Here ✔");
 			await login(dispatch, { username, password });
-
-			console.log("🆘 || file: Login.tsx:34 || username", typeof username);
+			navigate("/");
 		} else {
 			console.log(" passwordERROR");
 		}
