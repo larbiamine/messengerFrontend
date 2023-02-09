@@ -36,9 +36,11 @@ const userSlice = createSlice({
 
 			state.isFetching = false;
 			state.registerError = "";
+			state.loginError = "";
 
 			state.isRegisterError = false;
 		},
+
 		loginFailed: (state, action) => {
 			state.isLoginError = true;
 			state.loginError = action.payload;

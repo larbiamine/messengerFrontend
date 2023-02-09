@@ -81,10 +81,7 @@ function Login() {
 							className="ml-1 accent-var3 w-5 h-5 dark:ring-var3  focus:bg-var3 text-var3 bg-gray-100 border-gray-300 rounded-2xl focus:ring-var3 dark:focus:ring-var3 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
 						/>
 
-						<label
-							for="default-checkbox"
-							className="ml-1 text-sm font-medium text-white dark:text-gray-300"
-						>
+						<label className="ml-1 text-sm font-medium text-white dark:text-gray-300">
 							Remember Me
 						</label>
 					</div>
