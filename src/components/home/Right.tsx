@@ -1,19 +1,25 @@
 import UserAvatar from "./right/UserAvatar";
 import Conversation from "./right/Conversation";
 import { ConversationType } from "../../utilities/types";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../redux/store";
 type Props = {
 	isLoading: boolean;
 	conversation: ConversationType;
 };
 function Right({ conversation, isLoading }: Props) {
+	const { currentUser } = useSelector((state: IRootState) => state);
+
+	const recipient =
+		conversation.participants[1] === currentUser._id
+			? conversation.participants[0]
+			: conversation.participants[1];
 	return (
 		<div
 			style={{ marginTop: "0px" }}
 			className="border-var1 border basis-2/3 rounded-r-lg w-full   bg-var2 "
 		>
-			{!isLoading && conversation.participants && (
-				<UserAvatar id={conversation.participants[1]} />
-			)}
+			{!isLoading && conversation.participants && <UserAvatar id={recipient} />}
 			{isLoading ? (
 				<div
 					style={{

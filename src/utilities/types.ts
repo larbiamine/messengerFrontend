@@ -1,13 +1,13 @@
-interface Message {
+export interface MessageType {
 	_id: string;
 	sender: string;
 	body: string;
 	time: string;
 }
 export interface ConversationType {
-	_id: String;
+	_id: string;
 	participants: Array<String>;
-	messages: Array<Message>;
+	messages: Array<MessageType>;
 	createdAt: string;
 }
 

@@ -16,7 +16,6 @@ function MessageInput({ sendMsg, ref }: MessageInputProps) {
 				stroke="currentColor"
 				className="w-6 h-6"
 				onClick={() => {
-					console.log(body);
 					sendMsg(body);
 					setBody("");
 				}}
