@@ -3,12 +3,15 @@ import Conversation from "./right/Conversation";
 import { ConversationType } from "../../utilities/types";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/store";
+import { useState } from "react";
 type Props = {
 	isLoading: boolean;
 	conversation: ConversationType;
 };
 function Right({ conversation, isLoading }: Props) {
 	const { currentUser } = useSelector((state: IRootState) => state);
+
+	const [online, setOnline] = useState(false);
 
 	const recipient =
 		conversation.participants[1] === currentUser._id
@@ -19,7 +22,9 @@ function Right({ conversation, isLoading }: Props) {
 			style={{ marginTop: "0px" }}
 			className="border-var1 border basis-2/3 rounded-r-lg w-full   bg-var2 "
 		>
-			{!isLoading && conversation.participants && <UserAvatar id={recipient} />}
+			{!isLoading && conversation.participants && (
+				<UserAvatar online={online} id={recipient} />
+			)}
 			{isLoading ? (
 				<div
 					style={{
@@ -29,7 +34,12 @@ function Right({ conversation, isLoading }: Props) {
 				></div>
 			) : (
 				conversation.messages && (
-					<Conversation isLoading={isLoading} cconversation={conversation} />
+					<Conversation
+						online={online}
+						setOnline={setOnline}
+						isLoading={isLoading}
+						cconversation={conversation}
+					/>
 				)
 			)}
 		</div>

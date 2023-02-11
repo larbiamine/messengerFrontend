@@ -19,8 +19,6 @@ import { Navigate } from "react-router-dom";
 function App() {
 	const { currentUser } = useSelector((state: IRootState) => state);
 
-	console.log("🆘 || file: App.tsx:22 || currentUser", currentUser);
-
 	const loggedIn = currentUser ? true : false;
 
 	const routes = createRoutesFromElements(

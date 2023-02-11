@@ -1,6 +1,8 @@
 import axios from "axios";
-
+import { io } from "socket.io-client";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const WEBSOCKET_URL = import.meta.env.VITE_WEBSOCKET_URL;
+export const socket = io(WEBSOCKET_URL);
 
 var TOKEN = "";
 

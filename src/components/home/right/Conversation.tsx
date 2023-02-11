@@ -9,6 +9,8 @@ import { sendMessage } from "../../../utilities/fetchApi";
 interface Props {
 	cconversation: ConversationType;
 	isLoading: Boolean;
+	online: Boolean;
+	setOnline: Function;
 }
 interface MessageObj {
 	sender: boolean;
@@ -16,24 +18,23 @@ interface MessageObj {
 }
 
 import { useSelector } from "react-redux";
-import { io } from "socket.io-client";
+
 import { IRootState } from "../../../redux/store";
+import { socket } from "../../../utilities/requestMethodes";
 
-const socket = io("http://locohost:3000");
-
-function Conversation({ isLoading, cconversation }: Props) {
+function Conversation({ online, setOnline, isLoading, cconversation }: Props) {
 	const { currentUser } = useSelector((state: IRootState) => state);
 	const [isConnected, setIsConnected] = useState(false);
 
 	const [conversation, setConversation] =
 		useState<ConversationType>(cconversation);
 
-	// const [conversationMessages, setConversationMessages] = useState<
-	// 	MessageType[]
-	// >([]);
 	const [conversationMessages, setConversationMessages] = useState<
 		MessageType[]
-	>(conversation.messages);
+	>([]);
+	// const [conversationMessages, setConversationMessages] = useState<
+	// 	MessageType[]
+	// >(conversation.messages);
 
 	// const [loading, setLoading] = useState(true);
 	const bottomRef = useRef(null);
@@ -45,8 +46,23 @@ function Conversation({ isLoading, cconversation }: Props) {
 			});
 			bottomRef.current.scrollIntoView({ behavior: "smooth" });
 		});
+
+		let myinterval = setInterval(function () {
+			setOnline(false);
+			socket.on(`checkchat ${cconversation._id}`, (data) => {
+				setOnline(true);
+			});
+			socket.emit(`checkchat`, cconversation._id);
+		}, 2000);
+
+		socket.on(`checkLogged ${socket.id}`, (data) => {
+			setIsConnected(true);
+		});
 		socket.on("connect", () => {
 			setIsConnected(true);
+		});
+		socket.on("logged sockets", (data) => {
+			console.log(data);
 		});
 
 		socket.on("disconnect", () => {
@@ -54,6 +70,7 @@ function Conversation({ isLoading, cconversation }: Props) {
 		});
 		bottomRef.current.scrollIntoView({ behavior: "smooth" });
 		return () => {
+			clearInterval(myinterval);
 			socket.off("connect");
 			socket.off("disconnect");
 		};
@@ -61,7 +78,7 @@ function Conversation({ isLoading, cconversation }: Props) {
 
 	useEffect(() => {
 		setConversation(cconversation);
-		// setConversationMessages(cconversation.messages);
+		setConversationMessages(cconversation.messages);
 		// setLoading(false);
 		bottomRef.current.scrollIntoView({ behavior: "smooth" });
 	}, [cconversation]);
