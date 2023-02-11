@@ -27,6 +27,13 @@ function Home() {
 						conversations={data}
 					/>
 					<Right conversation={data[selectedChat]} isLoading={isLoading} />
+					{/* <Left
+						isLoading={isLoading}
+						selectedChat={selectedChat}
+						setSelectedChat={setSelectedChat}
+						refetch={refetch}
+						conversations={data}
+					/> */}
 				</div>
 			)}
 		</Container>
