@@ -9,7 +9,11 @@ function Home() {
 	const [selectedChat, setSelectedChat] = useState(0);
 
 	const querykey = ["conversations"];
-	const { status, data, isLoading } = useQuery(querykey, getConversations);
+	const { status, data, isLoading, refetch } = useQuery(
+		querykey,
+		getConversations
+	);
+
 	return (
 		<Container>
 			{/* <h1 className="text-3xl font-bold underline">Welcome</h1> */}
@@ -19,6 +23,7 @@ function Home() {
 						isLoading={isLoading}
 						selectedChat={selectedChat}
 						setSelectedChat={setSelectedChat}
+						refetch={refetch}
 						conversations={data}
 					/>
 					<Right conversation={data[selectedChat]} isLoading={isLoading} />
