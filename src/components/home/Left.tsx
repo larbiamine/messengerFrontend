@@ -56,7 +56,7 @@ function Left({
 					viewBox="0 0 24 24"
 					strokeWidth="1.5"
 					stroke="currentColor"
-					className="w-6 h-6 my-2 basis-2/12"
+					className="w-14 h-6 my-2 "
 					onClick={() => {
 						dispatch(logout());
 					}}
