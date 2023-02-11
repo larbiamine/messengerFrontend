@@ -3,6 +3,9 @@ import Search from "./left/Search";
 import { ConversationType } from "../../utilities/types";
 import { logout } from "../../redux/userRedux";
 import { useDispatch } from "react-redux";
+import { IRootState } from "../../redux/store";
+import { useSelector } from "react-redux";
+
 type Props = {
 	setSelectedChat: Function;
 	isLoading: Boolean;
@@ -19,10 +22,33 @@ function Left({
 	refetch,
 }: Props) {
 	const dispatch = useDispatch();
+	const { currentUser } = useSelector((state: IRootState) => state);
+
 	return (
 		<div className="  p-5 basis-1/3 rounded-l-lg w-full   bg-var2 ">
 			<div className="flex flex-row">
 				<h6 className="basis-11/12 mb-6 text-xl text-left">Chats</h6>
+
+				<div
+					id="tooltip-default"
+					role="tooltip"
+					className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+				>
+					Tooltip content
+					<div className="tooltip-arrow" data-popper-arrow></div>
+				</div>
+
+				<div className="group flex mx-2 relative">
+					<img
+						data-tooltip-target="tooltip-default"
+						src={currentUser.avatar}
+						alt=""
+						className="inline-block mx-2 relative object-cover object-center w-10 h-10 rounded-xl"
+					/>
+					<span className="group-hover:opacity-100 transition-opacity bg-var3 p-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 translate-y-full opacity-0 m-5 mx-auto">
+						{currentUser.username}
+					</span>
+				</div>
 
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +56,7 @@ function Left({
 					viewBox="0 0 24 24"
 					stroke-width="1.5"
 					stroke="currentColor"
-					className="w-6 h-6 my-1 basis-1/12"
+					className="w-6 h-6 my-2 basis-1/12"
 					onClick={() => {
 						dispatch(logout());
 					}}
