@@ -45,7 +45,7 @@ function Left({
 						alt=""
 						className="inline-block mx-2 relative object-cover object-center w-10 h-10 rounded-xl"
 					/>
-					<span className="group-hover:opacity-100 transition-opacity bg-var3 p-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 translate-y-full opacity-0 m-5 mx-auto">
+					<span className="group-hover:opacity-100 transition-opacity bg-var3 px-1 pb-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 translate-y-full opacity-0 m-5 mx-auto">
 						{currentUser.username}
 					</span>
 				</div>
