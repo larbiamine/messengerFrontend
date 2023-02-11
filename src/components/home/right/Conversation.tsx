@@ -28,17 +28,18 @@ function Conversation({ isLoading, cconversation }: Props) {
 	const [conversation, setConversation] =
 		useState<ConversationType>(cconversation);
 
+	// const [conversationMessages, setConversationMessages] = useState<
+	// 	MessageType[]
+	// >([]);
 	const [conversationMessages, setConversationMessages] = useState<
 		MessageType[]
 	>(conversation.messages);
 
-	const [loading, setLoading] = useState(true);
+	// const [loading, setLoading] = useState(true);
 	const bottomRef = useRef(null);
 
 	useEffect(() => {
 		socket.on(cconversation._id, (data) => {
-			console.log("From serber ", data);
-
 			setConversationMessages((old) => {
 				return [...old, JSON.parse(data)];
 			});
@@ -51,6 +52,7 @@ function Conversation({ isLoading, cconversation }: Props) {
 		socket.on("disconnect", () => {
 			setIsConnected(false);
 		});
+		bottomRef.current.scrollIntoView({ behavior: "smooth" });
 		return () => {
 			socket.off("connect");
 			socket.off("disconnect");
@@ -59,16 +61,14 @@ function Conversation({ isLoading, cconversation }: Props) {
 
 	useEffect(() => {
 		setConversation(cconversation);
-		setConversationMessages(cconversation.messages);
-		setLoading(false);
+		// setConversationMessages(cconversation.messages);
+		// setLoading(false);
 		bottomRef.current.scrollIntoView({ behavior: "smooth" });
 	}, [cconversation]);
 
 	const queryClient = useQueryClient();
 	const mutationKey = ["conversations"];
-	const mutation = useMutation(sendMessage, mutationKey, () => {
-		queryClient.invalidateQueries([mutationKey]);
-	});
+	const mutation = useMutation(sendMessage, mutationKey);
 
 	const sendMsg = (message: string) => {
 		if (message != "") {
