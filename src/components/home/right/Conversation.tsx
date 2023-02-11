@@ -59,7 +59,7 @@ function Conversation({ isLoading, cconversation }: Props) {
 
 	useEffect(() => {
 		setConversation(cconversation);
-
+		setConversationMessages(cconversation.messages);
 		setLoading(false);
 		bottomRef.current.scrollIntoView({ behavior: "smooth" });
 	}, [cconversation]);

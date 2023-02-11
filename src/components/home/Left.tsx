@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 type Props = {
 	setSelectedChat: Function;
 	isLoading: Boolean;
-
+	refetch: Function;
 	selectedChat?: number;
 	conversations: Array<ConversationType>;
 };
@@ -16,6 +16,7 @@ function Left({
 	isLoading,
 	selectedChat,
 	setSelectedChat,
+	refetch,
 }: Props) {
 	const dispatch = useDispatch();
 	return (
@@ -51,7 +52,13 @@ function Left({
 			>
 				{!isLoading ? (
 					conversations.map((c, index) => (
-						<div key={c._id} onClick={() => setSelectedChat(index)}>
+						<div
+							key={c._id}
+							onClick={() => {
+								refetch();
+								setSelectedChat(index);
+							}}
+						>
 							<Chat selected={selectedChat === index} conversation={c} />
 						</div>
 					))

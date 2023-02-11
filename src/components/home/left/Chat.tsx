@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingBlocks from "./LoadingBlocks";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../../redux/store";
-
+import { useState } from "react";
 interface props {
 	conversation: ConversationType;
 	selected: boolean;
@@ -23,7 +23,9 @@ function Chat({ conversation, selected }: props) {
 	const recipient =
 		participants[1] === currentUser._id ? participants[0] : participants[1];
 
-	const { body } = messages[messages.length - 1];
+	const [lastMessage, setLastMessage] = useState<string>(
+		messages[messages.length - 1].body
+	);
 
 	const querykey = [`user ${recipient}`];
 	const { status, data, error, isLoading } = useQuery(querykey, () =>
@@ -42,7 +44,7 @@ function Chat({ conversation, selected }: props) {
 			/>
 			<div className="text-left ml-4">
 				<h6 className="  ">{data.username}</h6>
-				<h6 className=" text-sm">{body}</h6>
+				<h6 className=" text-sm">{lastMessage}</h6>
 			</div>
 		</div>
 	) : (
