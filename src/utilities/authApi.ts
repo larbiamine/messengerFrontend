@@ -12,7 +12,6 @@ import { publicRequest } from "./requestMethodes";
 
 export const login = async (dispatch: Function, user: loginUser) => {
 	dispatch(loginStart());
-
 	try {
 		const res = await publicRequest.post("/auth/login", user);
 		dispatch(loginSuccess(res.data));

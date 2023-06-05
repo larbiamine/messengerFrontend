@@ -12,19 +12,28 @@ function Home() {
 		querykey,
 		getConversations
 	);
+	const myError = typeof data == "string";
+
+	console.log("🆘 || file: Home.tsx:17 || myError:", myError);
+
 	status === "success" && console.log("🆘 || file: Home.tsx:13 || data", data);
 	return (
 		<Container>
 			{/* <h1 className="text-3xl font-bold underline">Welcome</h1> */}
-			{status === "success" && (
+			{status === "success" && !myError && (
 				<div className="flex flex-row">
 					<Left
 						isLoading={isLoading}
 						selectedChat={selectedChat}
 						setSelectedChat={setSelectedChat}
-						conversations={data}
+						conversations={data || []}
 					/>
 					<Right conversation={data[selectedChat]} isLoading={isLoading} />
+				</div>
+			)}
+			{myError && (
+				<div className="flex flex-row">
+					{"Something Bad happened >[ Refresh"}
 				</div>
 			)}
 		</Container>
