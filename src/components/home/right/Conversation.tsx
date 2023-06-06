@@ -34,10 +34,17 @@ function Conversation({ online, setOnline, isLoading, cconversation }: Props) {
 	>([]);
 	// const [conversationMessages, setConversationMessages] = useState<
 	// 	MessageType[]
+
 	// >(conversation.messages);
 
 	// const [loading, setLoading] = useState(true);
 	const bottomRef = useRef(null);
+
+	const uniqueId = () => {
+		const dateString = Date.now().toString(36);
+		const randomness = Math.random().toString(36).substr(2);
+		return dateString + randomness;
+	};
 
 	useEffect(() => {
 		socket.on(cconversation._id, (data) => {
@@ -50,7 +57,7 @@ function Conversation({ online, setOnline, isLoading, cconversation }: Props) {
 		let myinterval = setInterval(function () {
 			setOnline(false);
 			socket.on(`checkchat ${cconversation._id}`, (data) => {
-				setOnline(true);
+				!online && setOnline(true);
 			});
 			socket.emit(`checkchat`, cconversation._id);
 		}, 2000);
@@ -90,6 +97,7 @@ function Conversation({ online, setOnline, isLoading, cconversation }: Props) {
 	const sendMsg = (message: string) => {
 		if (message != "") {
 			const messageObject = {
+				_id: uniqueId(),
 				body: message,
 				sender: currentUser._id,
 				conversation: cconversation._id,
@@ -100,6 +108,8 @@ function Conversation({ online, setOnline, isLoading, cconversation }: Props) {
 			socket.emit("message", JSON.stringify(messageObject));
 			const m = { conversationId: cconversation._id, body: message };
 			mutation.mutate(m);
+			// if (mutation.isError) {
+			// }
 			bottomRef.current.scrollIntoView({ behavior: "smooth" });
 		}
 	};
